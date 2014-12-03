@@ -197,4 +197,3 @@ private:
 
 }
 #endif /*EXTENDED_CODEC_H_ */
-
