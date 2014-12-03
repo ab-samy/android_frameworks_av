@@ -195,10 +195,13 @@ uint32_t ExtendedCodec::getComponentQuirks(
 
 const char* ExtendedCodec::overrideComponentName(
         uint32_t quirks, const sp<MetaData> &meta, const char *mime, bool isEncoder) {
+<<<<<<< HEAD
     const char* componentName = NULL;
     char value[PROPERTY_VALUE_MAX] = {0};
     int sw_codectype = 0;
     int enableSwHevc = 0;
+=======
+>>>>>>> 70fcaeaae404c7c770bbad1012a009d09429a680
 
     if (quirks & kRequiresWMAProComponent)
     {
@@ -214,6 +217,7 @@ const char* ExtendedCodec::overrideComponentName(
        }
     }
 
+<<<<<<< HEAD
     if (!isEncoder && !strncasecmp(mime, MEDIA_MIMETYPE_VIDEO_HEVC, strlen(MEDIA_MIMETYPE_VIDEO_HEVC))) {
         sw_codectype = property_get("media.swhevccodectype", value, NULL);
         enableSwHevc = atoi(value);
@@ -221,14 +225,13 @@ const char* ExtendedCodec::overrideComponentName(
            componentName = "OMX.qcom.video.decoder.hevcswvdec";
         }
     }
+=======
+>>>>>>> 70fcaeaae404c7c770bbad1012a009d09429a680
     return componentName;
 }
 
 void ExtendedCodec::overrideComponentName(
         uint32_t quirks, const sp<AMessage> &msg, AString* componentName, AString* mime, int32_t isEncoder) {
-    char value[PROPERTY_VALUE_MAX] = {0};
-    int sw_codectype = 0;
-    int enableSwHevc = 0;
 
     if (quirks & kRequiresWMAProComponent)
     {
@@ -243,6 +246,7 @@ void ExtendedCodec::overrideComponentName(
           }
        }
     }
+<<<<<<< HEAD
 
     int32_t wmvVersion = 0;
     if (!strncasecmp(mime->c_str(), MEDIA_MIMETYPE_VIDEO_WMV, strlen(MEDIA_MIMETYPE_VIDEO_WMV)) &&
@@ -268,6 +272,8 @@ void ExtendedCodec::overrideComponentName(
            componentName->setTo("OMX.qcom.video.decoder.hevcswvdec");
         }
     }
+=======
+>>>>>>> 70fcaeaae404c7c770bbad1012a009d09429a680
 }
 
 void ExtendedCodec::overrideMimeType(

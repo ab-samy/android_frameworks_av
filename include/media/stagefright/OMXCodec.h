@@ -26,6 +26,15 @@
 
 #include <OMX_Audio.h>
 
+#include <media/stagefright/ExtendedStats.h>
+
+#define PLAYER_STATS(func, ...) \
+    do { \
+        if(mPlayerExtendedStats != NULL) { \
+            mPlayerExtendedStats->func(__VA_ARGS__);} \
+    } \
+    while(0)
+
 namespace android {
 
 struct MediaCodecInfo;
@@ -131,6 +140,8 @@ protected:
     virtual ~OMXCodec();
 
 private:
+
+    sp<PlayerExtendedStats> mPlayerExtendedStats;
 
     // Make sure mLock is accessible to OMXCodecObserver
     friend class OMXCodecObserver;
@@ -317,7 +328,11 @@ private:
     status_t allocateBuffers();
     status_t allocateBuffersOnPort(OMX_U32 portIndex);
 #ifdef USE_SAMSUNG_COLORFORMAT
+<<<<<<< HEAD
  void setNativeWindowColorFormat(OMX_COLOR_FORMATTYPE &eNativeColorFormat);
+=======
+    void setNativeWindowColorFormat(OMX_COLOR_FORMATTYPE &eNativeColorFormat);
+>>>>>>> 70fcaeaae404c7c770bbad1012a009d09429a680
 #endif
     status_t allocateOutputBuffersFromNativeWindow();
 
