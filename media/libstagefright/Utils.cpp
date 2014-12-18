@@ -375,11 +375,10 @@ status_t convertMetaDataToMessage(
     ExtendedCodec::convertMetaDataToMessage(meta, &msg);
 
     *format = msg;
-
 #if 0
-    ALOGI("converted:");
-    meta->dumpToLog();
-    ALOGI("  to: %s", msg->debugString(0).c_str());
+	ALOGI("converted:");
+	meta->dumpToLog();
+	ALOGI(" to: %s", msg->debugString(0).c_str());
 #endif
 
     return OK;
@@ -634,7 +633,7 @@ void convertMessageToMetaData(const sp<AMessage> &msg, sp<MetaData> &meta) {
 
     // XXX TODO add whatever other keys there are
 
-    FFMPEGSoftCodec::convertMessageToMetaData(msg, meta);
+	FFMPEGSoftCodec::convertMessageToMetaData(msg, meta);
 
 #if 0
     ALOGI("converted %s to:", msg->debugString(0).c_str());

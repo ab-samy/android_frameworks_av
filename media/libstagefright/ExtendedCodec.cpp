@@ -47,6 +47,7 @@
 #define ARG_TOUCH(x) (void)x
 
 #ifdef ENABLE_AV_ENHANCEMENTS
+
 #include <QCMetaData.h>
 #include <QCMediaDefs.h>
 #include <OMX_QCOMExtns.h>
@@ -96,20 +97,20 @@ static const MetaKeyEntry MetaKeyTable[] {
    {kKeyHFR                  , "hfr"                    , INT32},  // int32_t
 #endif
 
-   {kKeyBitRate              , "bitrate"                , INT32},
+   {kKeyBitRate 			 , "bitrate" 				, INT32},
    {kKeySampleRate           , "sample-rate"            , INT32},
    {kKeyChannelCount         , "channel-count"          , INT32},
    {kKeyRawCodecSpecificData , "raw-codec-specific-data", CSD},
 
-   {kKeyBitsPerSample        , "bits-per-sample"        , INT32},
-   {kKeyCodecId              , "codec-id"               , INT32},
-   {kKeySampleFormat         , "sample-format"          , INT32},
-   {kKeyBlockAlign           , "block-align"            , INT32},
+   {kKeyBitsPerSample		 , "bits-per-sample" 		, INT32},
+   {kKeyCodecId 			 , "codec-id" 				, INT32},
+   {kKeySampleFormat		 , "sample-format"			, INT32},
+   {kKeyBlockAlign			 , "block-align" 			, INT32},
 
-   {kKeyAACAOT               , "aac-profile"            , INT32},
-   {kKeyRVVersion            , "rv-version"             , INT32},
-   {kKeyWMAVersion           , "wma-version"            , INT32},  // int32_t
-   {kKeyWMVVersion           , "wmv-version"            , INT32},
+   {kKeyAACAOT				 , "aac-profile" 			, INT32},
+   {kKeyRVVersion			 , "rv-version" 			, INT32},
+   {kKeyWMAVersion			 , "wma-version" 			, INT32}, // int32_t
+   {kKeyWMVVersion			 , "wmv-version" 			, INT32},
 };
 
 const char* ExtendedCodec::getMsgKey(int key) {
@@ -1186,7 +1187,7 @@ bool ExtendedCodec::isSourcePauseRequired(const char *componentName) {
     return false;
 }
 
-#else
+#else 
 
     uint32_t ExtendedCodec::getComponentQuirks (
             const sp<MediaCodecInfo> &info) {
@@ -1470,5 +1471,7 @@ bool ExtendedCodec::isSourcePauseRequired(const char *componentName) {
     bool ExtendedCodec::isSourcePauseRequired(const char *componentName) {
         return false;
     }
+
+
 #endif //ENABLE_AV_ENHANCEMENTS
 } //namespace android
