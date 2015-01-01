@@ -951,9 +951,7 @@ status_t ACodec::submitOutputMetaDataBuffer() {
 void ACodec::setNativeWindowColorFormat(OMX_COLOR_FORMATTYPE &eNativeColorFormat)
 {
     // In case of Samsung decoders, we set proper native color format for the Native Window
-    if (!strcasecmp(mComponentName.c_str(), "OMX.SEC.AVC.Decoder")
-        || !strcasecmp(mComponentName.c_str(), "OMX.SEC.FP.AVC.Decoder")
-        || !strcasecmp(mComponentName.c_str(), "OMX.Exynos.AVC.Decoder")) {
+    if(!strncasecmp(mComponentName.c_str(), "OMX.SEC.", 8)){
         switch (eNativeColorFormat) {
             case OMX_COLOR_FormatYUV420SemiPlanar:
                 eNativeColorFormat = (OMX_COLOR_FORMATTYPE)HAL_PIXEL_FORMAT_YCbCr_420_SP;
@@ -5573,6 +5571,11 @@ bool ACodec::ExecutingState::onOMXEvent(
                 mCodec->freeOutputBuffersNotOwnedByComponent();
 
                 mCodec->changeState(mCodec->mOutputPortSettingsChangedState);
+
+                bool isVideo = mCodec->mComponentName.find("video") != -1;
+                if (isVideo) {
+                    CODEC_PLAYER_STATS(profileStart, STATS_PROFILE_RECONFIGURE);
+                }
             } else if (data2 == OMX_IndexConfigCommonOutputCrop) {
                 mCodec->mSentFormat = false;
             } else {
@@ -5694,6 +5697,11 @@ bool ACodec::OutputPortSettingsChangedState::onOMXEvent(
                 }
 
                 mCodec->changeState(mCodec->mExecutingState);
+
+                bool isVideo = mCodec->mComponentName.find("video") != -1;
+                if (isVideo) {
+                    CODEC_PLAYER_STATS(profileStop, STATS_PROFILE_RECONFIGURE);
+                }
 
                 return true;
             }
